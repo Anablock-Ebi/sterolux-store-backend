@@ -1,39 +1,22 @@
 import { ExclamationCircle, MagnifyingGlass, PlusMini } from "@medusajs/icons";
 import { Button, Text, clx } from "@medusajs/ui";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-// @ts-ignore - RouterContext might not be exported, but we can access it
-import { UNSAFE_RouterContext } from "react-router-dom";
-
 // Safe Link component that handles Router context issues
 const SafeLink = ({ to, children }: { to: string; children: React.ReactNode }) => {
-  // Check if we're in Router context
-  let routerContext = null;
-  try {
-    routerContext = useContext(UNSAFE_RouterContext);
-  } catch (error) {
-    routerContext = null;
-  }
-
-  if (routerContext) {
-    return <Link to={to}>{children}</Link>;
-  } else {
-    // Fallback to regular anchor if Router context is not available
-    return (
-      <a 
-        href={to}
-        onClick={(e) => {
-          e.preventDefault();
-          if (typeof window !== 'undefined') {
-            window.location.href = to;
-          }
-        }}
-      >
-        {children}
-      </a>
-    );
-  }
+  // Always use regular anchor tag for maximum compatibility
+  return (
+    <a 
+      href={to}
+      onClick={(e) => {
+        e.preventDefault();
+        if (typeof window !== 'undefined') {
+          window.location.href = to;
+        }
+      }}
+    >
+      {children}
+    </a>
+  );
 };
 
 export type NoResultsProps = {

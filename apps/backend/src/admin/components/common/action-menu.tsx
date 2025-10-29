@@ -2,41 +2,24 @@ import { DropdownMenu, IconButton, clx } from "@medusajs/ui";
 
 import { EllipsisHorizontal } from "@medusajs/icons";
 import { ReactNode } from "react";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-// @ts-ignore - RouterContext might not be exported, but we can access it
-import { UNSAFE_RouterContext } from "react-router-dom";
-
 // Safe Link component that handles Router context issues
 const SafeLink = ({ to, children, ...props }: { to: string; children: React.ReactNode; [key: string]: any }) => {
-  // Check if we're in Router context
-  let routerContext = null;
-  try {
-    routerContext = useContext(UNSAFE_RouterContext);
-  } catch (error) {
-    routerContext = null;
-  }
-
-  if (routerContext) {
-    return <Link to={to} {...props}>{children}</Link>;
-  } else {
-    // Fallback to regular anchor if Router context is not available
-    return (
-      <a 
-        href={to}
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          if (typeof window !== 'undefined') {
-            window.location.href = to;
-          }
-        }}
-        {...props}
-      >
-        {children}
-      </a>
-    );
-  }
+  // Always use regular anchor tag for maximum compatibility
+  return (
+    <a 
+      href={to}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (typeof window !== 'undefined') {
+          window.location.href = to;
+        }
+      }}
+      {...props}
+    >
+      {children}
+    </a>
+  );
 };
 
 export type Action = {
