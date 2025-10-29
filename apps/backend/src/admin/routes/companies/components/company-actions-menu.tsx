@@ -3,8 +3,8 @@ import { Link, LockClosedSolid, PencilSquare, Trash } from "@medusajs/icons";
 import { toast } from "@medusajs/ui";
 import { QueryCompany } from "../../../../types";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { ActionMenu } from "../../../components/common";
+import { useSafeNavigate } from "../../../hooks/use-safe-navigate";
 import { DeletePrompt } from "../../../components/common/delete-prompt";
 import { useDeleteCompany } from "../../../hooks/api";
 import {
@@ -27,7 +27,7 @@ export const CompanyActionsMenu = ({
   const { mutateAsync: mutateDelete, isPending: loadingDelete } =
     useDeleteCompany(company.id);
 
-  const navigate = useNavigate();
+  const navigate = useSafeNavigate();
 
   const handleDelete = () => {
     mutateDelete(company.id, {

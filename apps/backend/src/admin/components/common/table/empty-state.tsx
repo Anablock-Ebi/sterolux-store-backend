@@ -3,6 +3,28 @@ import { Button, Text, clx } from "@medusajs/ui";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
+// Safe Link component that handles Router context issues
+const SafeLink = ({ to, children }: { to: string; children: React.ReactNode }) => {
+  try {
+    return <Link to={to}>{children}</Link>;
+  } catch (error) {
+    // Fallback to regular anchor if Router context is not available
+    return (
+      <a 
+        href={to}
+        onClick={(e) => {
+          e.preventDefault();
+          if (typeof window !== 'undefined') {
+            window.location.href = to;
+          }
+        }}
+      >
+        {children}
+      </a>
+    );
+  }
+};
+
 export type NoResultsProps = {
   title?: string;
   message?: string;
@@ -48,20 +70,20 @@ type NoRecordsProps = {
 
 const DefaultButton = ({ action }: ActionProps) =>
   action && (
-    <Link to={action.to}>
+    <SafeLink to={action.to}>
       <Button variant="secondary" size="small">
         {action.label}
       </Button>
-    </Link>
+    </SafeLink>
   );
 
 const TransparentIconLeftButton = ({ action }: ActionProps) =>
   action && (
-    <Link to={action.to}>
+    <SafeLink to={action.to}>
       <Button variant="transparent" className="text-ui-fg-interactive">
         <PlusMini /> {action.label}
       </Button>
-    </Link>
+    </SafeLink>
   );
 
 export const NoRecords = ({

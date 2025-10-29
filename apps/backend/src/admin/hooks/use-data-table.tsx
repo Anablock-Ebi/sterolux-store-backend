@@ -44,9 +44,30 @@ export const useDataTable = <TData,>({
   meta,
   prefix,
 }: UseDataTableProps<TData>) => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  // Handle potential Router context issues
+  let searchParams: URLSearchParams;
+  let setSearchParams: (params: URLSearchParams | ((prev: URLSearchParams) => URLSearchParams)) => void;
+  let offset: string | null = null;
+  
+  try {
+    const [routerParams, setRouterParams] = useSearchParams();
+    searchParams = routerParams;
+    setSearchParams = setRouterParams;
+  } catch (error) {
+    // Fallback when not in Router context
+    searchParams = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
+    setSearchParams = (updater) => {
+      if (typeof window !== 'undefined') {
+        const newParams = typeof updater === 'function' ? updater(searchParams) : updater;
+        const newUrl = new URL(window.location.href);
+        newUrl.search = newParams.toString();
+        window.history.replaceState({}, '', newUrl);
+      }
+    };
+  }
+  
   const offsetKey = `${prefix ? `${prefix}_` : ""}offset`;
-  const offset = searchParams.get(offsetKey);
+  offset = searchParams.get(offsetKey);
 
   const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
     pageIndex: offset ? Math.ceil(Number(offset) / _pageSize) : 0,

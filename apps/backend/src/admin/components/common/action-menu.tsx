@@ -4,6 +4,30 @@ import { EllipsisHorizontal } from "@medusajs/icons";
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 
+// Safe Link component that handles Router context issues
+const SafeLink = ({ to, children, ...props }: { to: string; children: React.ReactNode; [key: string]: any }) => {
+  try {
+    return <Link to={to} {...props}>{children}</Link>;
+  } catch (error) {
+    // Fallback to regular anchor if Router context is not available
+    return (
+      <a 
+        href={to}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (typeof window !== 'undefined') {
+            window.location.href = to;
+          }
+        }}
+        {...props}
+      >
+        {children}
+      </a>
+    );
+  }
+};
+
 export type Action = {
   icon: ReactNode;
   label: string;
@@ -80,10 +104,10 @@ export const ActionMenu = ({ groups }: ActionMenuProps) => {
                       asChild
                       disabled={action.disabled}
                     >
-                      <Link to={action.to} onClick={(e) => e.stopPropagation()}>
+                      <SafeLink to={action.to} onClick={(e) => e.stopPropagation()}>
                         {action.icon}
                         <span>{action.label}</span>
-                      </Link>
+                      </SafeLink>
                     </DropdownMenu.Item>
                   </div>
                 );

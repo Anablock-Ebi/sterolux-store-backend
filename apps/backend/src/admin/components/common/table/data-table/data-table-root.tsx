@@ -17,6 +17,30 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { NoResults } from "../empty-state";
 
+// Safe Link component that handles Router context issues
+const SafeLink = ({ to, className, children, ...props }: { to: string; className?: string; children: React.ReactNode; [key: string]: any }) => {
+  try {
+    return <Link to={to} className={className} {...props}>{children}</Link>;
+  } catch (error) {
+    // Fallback to regular anchor if Router context is not available
+    return (
+      <a 
+        href={to} 
+        className={className}
+        onClick={(e) => {
+          e.preventDefault();
+          if (typeof window !== 'undefined') {
+            window.location.href = to;
+          }
+        }}
+        {...props}
+      >
+        {children}
+      </a>
+    );
+  }
+};
+
 type BulkCommand = {
   label: string;
   shortcut: string;
@@ -281,7 +305,7 @@ export const DataTableRoot = <TData,>({
                           }}
                         >
                           {shouldRenderAsLink ? (
-                            <Link
+                            <SafeLink
                               to={to}
                               className="size-full outline-none"
                               data-row-link
@@ -297,7 +321,7 @@ export const DataTableRoot = <TData,>({
                               >
                                 {Inner}
                               </div>
-                            </Link>
+                            </SafeLink>
                           ) : (
                             Inner
                           )}
