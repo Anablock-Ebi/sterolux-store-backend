@@ -15,13 +15,24 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+// @ts-ignore - RouterContext might not be exported, but we can access it
+import { UNSAFE_RouterContext } from "react-router-dom";
 import { NoResults } from "../empty-state";
 
 // Safe Link component that handles Router context issues
 const SafeLink = ({ to, className, children, ...props }: { to: string; className?: string; children: React.ReactNode; [key: string]: any }) => {
+  // Check if we're in Router context
+  let routerContext = null;
   try {
-    return <Link to={to} className={className} {...props}>{children}</Link>;
+    routerContext = useContext(UNSAFE_RouterContext);
   } catch (error) {
+    routerContext = null;
+  }
+
+  if (routerContext) {
+    return <Link to={to} className={className} {...props}>{children}</Link>;
+  } else {
     // Fallback to regular anchor if Router context is not available
     return (
       <a 
