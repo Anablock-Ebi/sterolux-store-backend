@@ -13,6 +13,9 @@ node_modules
 !.yarn/versions
 .pnp.*
 
+# pnpm
+.pnpm-store/
+
 # Testing
 coverage
 

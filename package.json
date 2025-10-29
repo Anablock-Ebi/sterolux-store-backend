@@ -1,0 +1,27 @@
+{
+  "name": "medusa-b2b-monorepo",
+  "version": "1.0.0",
+  "description": "Medusa B2B Store Monorepo with Turborepo",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "start": "turbo start",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "clean": "turbo clean"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.8"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "pnpm": {
+    "overrides": {
+      "webpack": "^5",
+      "zod": "^3.25.0"
+    }
+  }
+}

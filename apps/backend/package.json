@@ -1,9 +1,8 @@
 {
-  "name": "medusa-b2b-starter",
+  "name": "sterolux-ecommerce",
   "version": "0.0.1",
-  "description": "A starter for Medusa B2B projects.",
-  "author": "Medusa (https://medusajs.com)",
-  "license": "MIT",
+  "description": "Sterolux Ecommerce Backend powered by Medusa.",
+  "author": "Sterolux",
   "keywords": [
     "sqlite",
     "postgres",
@@ -36,7 +35,7 @@
     "awilix": "^8.0.1",
     "pg": "^8.13.0",
     "react-router-dom": "^7.9.4",
-    "zod": "^3.22.4"
+    "zod": "^3.25.0"
   },
   "devDependencies": {
     "@medusajs/test-utils": "2.8.4",
@@ -59,5 +58,5 @@
   "engines": {
     "node": ">=20"
   },
-  "packageManager": "yarn@4.4.0"
+  "packageManager": "pnpm@9.0.0"
 }
