@@ -976,4 +976,29 @@ export default async function seedDemoData({ container }: ExecArgs) {
   });
 
   logger.info("Finished seeding product data.");
+
+  // Create admin user invite if ADMIN_EMAIL is provided
+  if (process.env.ADMIN_EMAIL) {
+    logger.info("Creating admin user invite...");
+    const userService = container.resolve(ModuleRegistrationName.USER);
+    
+    try {
+      const existingInvites = await userService.listInvites({
+        email: process.env.ADMIN_EMAIL,
+      });
+      
+      if (existingInvites.length === 0) {
+        const invite = await userService.createInvites({ 
+          email: process.env.ADMIN_EMAIL 
+        });
+        logger.info(`Admin invite created for ${process.env.ADMIN_EMAIL}`);
+        logger.info(`Invite token: ${invite.token}`);
+        logger.info(`Complete setup at: [your-admin-url]/invite?token=${invite.token}`);
+      } else {
+        logger.info(`Admin invite already exists for ${process.env.ADMIN_EMAIL}`);
+      }
+    } catch (error) {
+      logger.error("Failed to create admin invite:", error);
+    }
+  }
 }
