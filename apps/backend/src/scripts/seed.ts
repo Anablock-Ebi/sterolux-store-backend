@@ -40,6 +40,13 @@ export default async function seedDemoData({ container }: ExecArgs) {
 
   const countries = ["gb", "de", "dk", "se", "fr", "es", "it"];
 
+  // Check if data already exists
+  const existingProducts = await container.resolve(ModuleRegistrationName.PRODUCT).listProducts();
+  if (existingProducts.length > 0) {
+    logger.info("Products already exist, skipping seed...");
+    return;
+  }
+
   logger.info("Seeding store data...");
   const [store] = await storeModuleService.listStores();
   let defaultSalesChannel = await salesChannelModuleService.listSalesChannels({
