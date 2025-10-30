@@ -15,9 +15,10 @@ export const POST = async (
 
   await createQuoteMessageWorkflow(req.scope).run({
     input: {
-      ...req.validatedBody,
       customer_id: req.auth_context.actor_id,
       quote_id: id,
+      text: req.validatedBody.text,
+      item_id: req.validatedBody.item_id,
     },
   });
 
