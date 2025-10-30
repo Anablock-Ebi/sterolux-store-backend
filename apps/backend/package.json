@@ -25,6 +25,7 @@
     "@medusajs/cli": "2.8.4",
     "@medusajs/dashboard": "2.8.4",
     "@medusajs/framework": "2.8.4",
+    "@medusajs/icons": "2.8.4",
     "@medusajs/js-sdk": "2.8.4",
     "@medusajs/medusa": "2.8.4",
     "@medusajs/ui": "4.0.14",
@@ -36,7 +37,7 @@
     "awilix": "^8.0.1",
     "pg": "^8.13.0",
     "react-router-dom": "^7.9.4",
-    "zod": "^3.25.0"
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@medusajs/test-utils": "2.8.4",
