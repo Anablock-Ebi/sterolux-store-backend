@@ -1,11 +1,16 @@
-import { ICustomerModuleService } from "@medusajs/framework/types";
+import {
+  ICustomerModuleService,
+  RemoteQueryFunction,
+} from "@medusajs/framework/types";
 import { ContainerRegistrationKeys, Modules } from "@medusajs/framework/utils";
 import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk";
 
 export const addCompanyEmployeesToCustomerGroupStep = createStep(
   "add-company-employees-to-customer-group",
   async (input: { company_id: string }, { container }) => {
-    const query = container.resolve(ContainerRegistrationKeys.QUERY);
+    const query = container.resolve<RemoteQueryFunction>(
+      ContainerRegistrationKeys.QUERY
+    );
 
     const {
       data: [{ id, customer_group, employees }],

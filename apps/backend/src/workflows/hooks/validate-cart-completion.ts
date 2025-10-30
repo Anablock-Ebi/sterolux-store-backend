@@ -3,9 +3,11 @@ import { StepResponse } from "@medusajs/framework/workflows-sdk";
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils";
 import { getCartApprovalStatus } from "../../utils/get-cart-approval-status";
 import { checkSpendingLimit } from "../../utils/check-spending-limit";
-import { HttpTypes } from "@medusajs/framework/types";
+import { HttpTypes, RemoteQueryFunction } from "@medusajs/framework/types";
 completeCartWorkflow.hooks.validate(async ({ cart }, { container }) => {
-  const query = container.resolve(ContainerRegistrationKeys.QUERY);
+  const query = container.resolve<RemoteQueryFunction>(
+    ContainerRegistrationKeys.QUERY
+  );
 
   const {
     data: [queryCart],
