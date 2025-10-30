@@ -1,5 +1,0 @@
-[build]
-buildCommand = "npx medusa build && pnpm install --prefix .medusa/server && cp .env .medusa/server/.env.production"
-
-[deploy]
-startCommand = "NODE_ENV=production pnpm --prefix .medusa/server run start"
