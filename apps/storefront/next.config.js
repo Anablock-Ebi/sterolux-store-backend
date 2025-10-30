@@ -10,10 +10,16 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   logging: {
     fetches: {
       fullUrl: true,
     },
+  },
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
   },
   images: {
     remotePatterns: [

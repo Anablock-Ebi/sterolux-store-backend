@@ -38,28 +38,35 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const countryCodes = await listRegions().then(
-    (regions) =>
-      regions
-        ?.map((r) => r.countries?.map((c) => c.iso_2))
-        .flat()
-        .filter(Boolean) as string[]
-  )
+  try {
+    const regions = await listRegions()
+    const countryCodes = regions
+      ?.map((r) => r.countries?.map((c) => c.iso_2))
+      .flat()
+      .filter(Boolean) as string[]
 
-  if (!countryCodes) {
-    return null
-  }
+    if (!countryCodes) {
+      return []
+    }
 
-  const categories = await listCategories()
+    const categories = await listCategories()
 
-  return countryCodes
-    .map((countryCode) =>
-      categories.map((category) => ({
-        countryCode,
-        category: category.handle.split("/"),
-      }))
+    return countryCodes
+      .map((countryCode) =>
+        categories.map((category) => ({
+          countryCode,
+          category: category.handle.split("/"),
+        }))
+      )
+      .flat()
+  } catch (error) {
+    console.warn(
+      "Failed to generate static paths for categories during build:",
+      error
     )
-    .flat()
+    // Return empty array to allow build to continue with dynamic rendering
+    return []
+  }
 }
 
 export default async function CategoryPage(props: Props) {
