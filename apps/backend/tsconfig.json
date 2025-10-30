@@ -20,11 +20,7 @@
     "jsx": "react-jsx",
     "forceConsistentCasingInFileNames": false,
     "resolveJsonModule": true,
-    "checkJs": false,
-    "paths": {
-      "@starter/types": ["./src/types"],
-      "@starter/types/*": ["./src/types/*"]
-    }
+    "checkJs": false
   },
   "ts-node": {
     "swc": true
