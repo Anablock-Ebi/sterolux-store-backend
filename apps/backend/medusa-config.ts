@@ -16,14 +16,12 @@ module.exports = defineConfig({
       cookieSecret: process.env.COOKIE_SECRET || "supersecret",
     },
     sessionOptions: {
-      store: process.env.REDIS_URL ? {
-        resave: false,
-        saveUninitialized: false,
+      resave: false,
+      saveUninitialized: false,
+      ...(process.env.REDIS_URL && {
         store: "connect-redis",
-        options: {
-          url: process.env.REDIS_URL,
-        },
-      } : undefined,
+        url: process.env.REDIS_URL,
+      }),
     },
   },
   admin: {
