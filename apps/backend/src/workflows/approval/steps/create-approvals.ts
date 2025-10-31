@@ -1,3 +1,5 @@
+import { RemoteQueryFunction } from "@medusajs/framework/types";
+import { ContainerRegistrationKeys } from "@medusajs/framework/utils";
 import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk";
 import { APPROVAL_MODULE } from "../../../modules/approval";
 import {
@@ -15,7 +17,9 @@ export const createApprovalStep = createStep(
       | Omit<ModuleCreateApproval, "type">[],
     { container }
   ) => {
-    const query = container.resolve("query");
+    const query = container.resolve<RemoteQueryFunction>(
+      ContainerRegistrationKeys.QUERY
+    );
 
     const approvalData = Array.isArray(input) ? input : [input];
 

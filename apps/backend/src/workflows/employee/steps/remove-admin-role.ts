@@ -1,4 +1,7 @@
-import { IAuthModuleService } from "@medusajs/framework/types";
+import {
+  IAuthModuleService,
+  RemoteQueryFunction,
+} from "@medusajs/framework/types";
 import { Modules } from "@medusajs/framework/utils";
 import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk";
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils";
@@ -13,7 +16,9 @@ export const removeAdminRoleStep = createStep(
       Modules.AUTH
     );
 
-    const query = container.resolve(ContainerRegistrationKeys.QUERY);
+    const query = container.resolve<RemoteQueryFunction>(
+      ContainerRegistrationKeys.QUERY
+    );
 
     const {
       data: [providerIdentity],

@@ -1,4 +1,7 @@
-import { IAuthModuleService } from "@medusajs/framework/types";
+import {
+  IAuthModuleService,
+  RemoteQueryFunction,
+} from "@medusajs/framework/types";
 import { ContainerRegistrationKeys, Modules } from "@medusajs/framework/utils";
 import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk";
 
@@ -8,7 +11,9 @@ export const setAdminRoleStep = createStep(
     input: { employeeId: string; customerId: string },
     { container }
   ): Promise<any> => {
-    const query = container.resolve(ContainerRegistrationKeys.QUERY);
+    const query = container.resolve<RemoteQueryFunction>(
+      ContainerRegistrationKeys.QUERY
+    );
 
     const {
       data: [employee],

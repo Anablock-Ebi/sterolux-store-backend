@@ -1,4 +1,4 @@
-import { ExecArgs } from "@medusajs/framework/types";
+import { ExecArgs, RemoteQueryFunction } from "@medusajs/framework/types";
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils";
 import { createApprovalSettingsWorkflow } from "../workflows/approval/workflows";
 
@@ -11,7 +11,9 @@ import { createApprovalSettingsWorkflow } from "../workflows/approval/workflows"
  */
 export default async function createApprovalSettings({ container }: ExecArgs) {
   const logger = container.resolve(ContainerRegistrationKeys.LOGGER);
-  const query = container.resolve(ContainerRegistrationKeys.QUERY);
+  const query = container.resolve<RemoteQueryFunction>(
+    ContainerRegistrationKeys.QUERY
+  );
 
   const { data: companies } = await query.graph({
     entity: "company",

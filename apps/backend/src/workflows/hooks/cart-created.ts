@@ -12,7 +12,7 @@ createCartWorkflow.hooks.cartCreated(
     | StepResponse<undefined, null>
     | StepResponse<undefined, { cart_id: string; company_id: string }>
   > => {
-    const remoteLink = container.resolve(ContainerRegistrationKeys.LINK);
+    const remoteLink = container.resolve(ContainerRegistrationKeys.LINK) as any;
 
     const cartInputdata = cart as CartDTO;
 
@@ -42,7 +42,9 @@ createCartWorkflow.hooks.cartCreated(
       return;
     }
 
-    const remoteLink = container.resolve(ContainerRegistrationKeys.REMOTE_LINK);
+    const remoteLink = container.resolve(
+      ContainerRegistrationKeys.REMOTE_LINK
+    ) as any;
 
     await remoteLink.dismiss({
       [COMPANY_MODULE]: {

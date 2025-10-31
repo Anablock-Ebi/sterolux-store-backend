@@ -5,7 +5,9 @@ import { COMPANY_MODULE } from "../../modules/company";
 
 createOrderWorkflow.hooks.orderCreated(
   async ({ order }, { container }) => {
-    const remoteLink = container.resolve(ContainerRegistrationKeys.REMOTE_LINK);
+    const remoteLink = container.resolve(
+      ContainerRegistrationKeys.REMOTE_LINK
+    ) as any;
 
     if (!order.metadata?.company_id) {
       return new StepResponse(undefined, null);
@@ -27,7 +29,9 @@ createOrderWorkflow.hooks.orderCreated(
       return;
     }
 
-    const remoteLink = container.resolve(ContainerRegistrationKeys.REMOTE_LINK);
+    const remoteLink = container.resolve(
+      ContainerRegistrationKeys.REMOTE_LINK
+    ) as any;
 
     await remoteLink.dismiss({
       [Modules.ORDER]: {

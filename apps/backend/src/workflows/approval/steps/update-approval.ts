@@ -1,3 +1,5 @@
+import { RemoteQueryFunction } from "@medusajs/framework/types";
+import { ContainerRegistrationKeys } from "@medusajs/framework/utils";
 import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk";
 import { APPROVAL_MODULE } from "../../../modules/approval";
 import {
@@ -13,7 +15,9 @@ export const updateApprovalStep = createStep(
     input: ModuleUpdateApproval,
     { container }
   ): Promise<StepResponse<ModuleApproval, ModuleUpdateApproval>> => {
-    const query = container.resolve("query");
+    const query = container.resolve<RemoteQueryFunction>(
+      ContainerRegistrationKeys.QUERY
+    );
     const approvalModule =
       container.resolve<IApprovalModuleService>(APPROVAL_MODULE);
 
