@@ -45,6 +45,7 @@ const Payment = ({
 
   const stripeReady = useContext(StripeContext)
 
+
   const paidByGiftcard =
     cart?.gift_cards && cart?.gift_cards?.length > 0 && cart?.total === 0
 
@@ -217,7 +218,7 @@ const Payment = ({
               isLoading={isLoading}
               disabled={
                 (selectedPaymentMethod === "pp_stripe_stripe" &&
-                  !cardComplete) ||
+                  activeSession && !cardComplete) ||
                 (!selectedPaymentMethod && !paidByGiftcard)
               }
               data-testid="submit-payment-button"

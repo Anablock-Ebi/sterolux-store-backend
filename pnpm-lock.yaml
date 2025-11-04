@@ -59,6 +59,9 @@ importers:
       awilix:
         specifier: ^8.0.1
         version: 8.0.1
+      payment-stripe:
+        specifier: link:@medusajs/medusa/payment-stripe
+        version: link:@medusajs/medusa/payment-stripe
       pg:
         specifier: ^8.13.0
         version: 8.16.3

@@ -35,6 +35,7 @@
     "@mikro-orm/migrations": "6.4.16",
     "@mikro-orm/postgresql": "6.4.16",
     "awilix": "^8.0.1",
+    "payment-stripe": "link:@medusajs/medusa/payment-stripe",
     "pg": "^8.13.0",
     "react-router-dom": "^7.9.4",
     "zod": "^3.25.0"
