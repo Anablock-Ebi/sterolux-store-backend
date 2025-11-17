@@ -1,6 +1,14 @@
 import { listRegions } from "@/lib/data/regions"
 import FeaturedProducts from "@/modules/home/components/featured-products"
+
 import Hero from "@/modules/home/components/hero"
+import { CtaSection } from "@/modules/layout/components/cta-section"
+import { HeroSection } from "@/modules/layout/components/sections/hero-section"
+import { PrecisionSection } from "@/modules/layout/components/sections/precision-section"
+import { RecentBlogArticles } from "@/modules/layout/components/sections/recent-blogs-section"
+import { StatsSection } from "@/modules/layout/components/sections/stats-section"
+import { TrustedHealthcare } from "@/modules/layout/components/trusted-health"
+import Footer from "@/modules/layout/templates/footer"
 import SkeletonFeaturedProducts from "@/modules/skeletons/templates/skeleton-featured-products"
 import { Metadata } from "next"
 import { Suspense } from "react"
@@ -40,11 +48,21 @@ export default async function Home(props: {
   const { countryCode } = params
 
   return (
-    <div className="flex flex-col gap-y-2 m-2">
-      <Hero />
-      <Suspense fallback={<SkeletonFeaturedProducts />}>
-        <FeaturedProducts countryCode={countryCode} />
-      </Suspense>
-    </div>
+    <>
+      <HeroSection />
+
+      <div className="flex flex-col gap-y-2 m-2">
+        {/* <Suspense fallback={<SkeletonFeaturedProducts />}>
+          <FeaturedProducts countryCode={countryCode} />
+        </Suspense> */}
+        <FeaturedProducts />
+      </div>
+      <StatsSection />
+      <PrecisionSection />
+      <TrustedHealthcare />
+      <RecentBlogArticles />
+      <CtaSection />
+      <Footer />
+    </>
   )
 }

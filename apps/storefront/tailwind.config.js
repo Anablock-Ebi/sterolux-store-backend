@@ -24,7 +24,8 @@ module.exports = {
         "2xlarge": "1920px",
       },
       fontFamily: {
-        sans: ["var(--font-geist-sans)"],
+        inter: ["var(--font-inter)", "sans-serif"],
+        geist: ["var(--font-geist)", "sans-serif"],
       },
       keyframes: {
         "accordion-open": {

@@ -1,161 +1,151 @@
-import { listCategories } from "@/lib/data/categories"
-import { listCollections } from "@/lib/data/collections"
-import { Text, clx } from "@medusajs/ui"
-
+import Link from "next/link"
 import LocalizedClientLink from "@/modules/common/components/localized-client-link"
-import MedusaCTA from "@/modules/layout/components/medusa-cta"
+import Image from "next/image"
+import { SectionContainer } from "@/modules/common/components/container"
+import { SocialIcons } from "@/modules/common/icons/social/indext"
+import { EmailIcon } from "@/modules/common/icons/email"
 
-export default async function Footer() {
-  const { collections } = await listCollections({
-    offset: "0",
-    limit: "6",
-  })
-  const product_categories = await listCategories({
-    offset: 0,
-    limit: 6,
-  })
-
+export default function Footer() {
   return (
-    <footer className="border-t border-ui-border-base w-full">
-      <div className="content-container flex flex-col w-full">
-        <div className="flex flex-col gap-y-6 xsmall:flex-row items-start justify-between py-40">
-          <div>
-            <LocalizedClientLink
-              href="/"
-              className="txt-compact-xlarge-plus text-ui-fg-subtle hover:text-ui-fg-base uppercase"
-            >
-              Medusa Store
-            </LocalizedClientLink>
-          </div>
-          <div className="text-small-regular gap-10 md:gap-x-16 grid grid-cols-2 sm:grid-cols-3">
-            {product_categories && product_categories?.length > 0 && (
-              <div className="flex flex-col gap-y-2">
-                <span className="txt-small-plus txt-ui-fg-base">
-                  Categories
-                </span>
-                <ul
-                  className="grid grid-cols-1 gap-2"
-                  data-testid="footer-categories"
-                >
-                  {product_categories?.slice(0, 6).map((c) => {
-                    if (c.parent_category) {
-                      return
-                    }
-
-                    const children =
-                      c.category_children?.map((child) => ({
-                        name: child.name,
-                        handle: child.handle,
-                        id: child.id,
-                      })) || null
-
-                    return (
-                      <li
-                        className="flex flex-col gap-2 text-ui-fg-subtle txt-small"
-                        key={c.id}
-                      >
-                        <LocalizedClientLink
-                          className={clx(
-                            "hover:text-ui-fg-base",
-                            children && "txt-small-plus"
-                          )}
-                          href={`/categories/${c.handle}`}
-                          data-testid="category-link"
-                        >
-                          {c.name}
-                        </LocalizedClientLink>
-                        {children && (
-                          <ul className="grid grid-cols-1 ml-3 gap-2">
-                            {children &&
-                              children.map((child) => (
-                                <li key={child.id}>
-                                  <LocalizedClientLink
-                                    className="hover:text-ui-fg-base"
-                                    href={`/categories/${child.handle}`}
-                                    data-testid="category-link"
-                                  >
-                                    {child.name}
-                                  </LocalizedClientLink>
-                                </li>
-                              ))}
-                          </ul>
-                        )}
-                      </li>
-                    )
-                  })}
-                </ul>
+    <footer className="bg-[#F4F3EF] py-16">
+      <SectionContainer>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-3">
+              <div>
+                <Image
+                  src="/logo.svg"
+                  alt="Sterolux"
+                  width={120}
+                  height={50}
+                  className="h-24 w-auto"
+                />
               </div>
-            )}
-            {collections && collections.length > 0 && (
-              <div className="flex flex-col gap-y-2">
-                <span className="txt-small-plus txt-ui-fg-base">
-                  Collections
-                </span>
-                <ul
-                  className={clx(
-                    "grid grid-cols-1 gap-2 text-ui-fg-subtle txt-small",
-                    {
-                      "grid-cols-2": (collections?.length || 0) > 3,
-                    }
-                  )}
-                >
-                  {collections?.slice(0, 6).map((c) => (
-                    <li key={c.id}>
-                      <LocalizedClientLink
-                        className="hover:text-ui-fg-base"
-                        href={`/collections/${c.handle}`}
-                      >
-                        {c.title}
-                      </LocalizedClientLink>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            <div className="flex flex-col gap-y-2">
-              <span className="txt-small-plus txt-ui-fg-base">Medusa</span>
-              <ul className="grid grid-cols-1 gap-y-2 text-ui-fg-subtle txt-small">
-                <li>
-                  <a
-                    href="https://github.com/medusajs"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-ui-fg-base"
-                  >
-                    GitHub
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://docs.medusajs.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-ui-fg-base"
-                  >
-                    Documentation
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/medusajs/b2b-starter-medusa"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-ui-fg-base"
-                  >
-                    Source code
-                  </a>
-                </li>
-              </ul>
+              <p className="text-neutral-600 text-sm leading-relaxed">
+                Innovative Technology for Healthcare Infection Control
+              </p>
+            </div>
+
+            <div className="flex gap-4">
+              <SocialIcons />
             </div>
           </div>
+
+          <div className="flex flex-col gap-4">
+            <h3 className="font-semibold text-neutral-900 text-lg">Products</h3>
+            <ul className="flex flex-col gap-3">
+              <li>
+                <LocalizedClientLink
+                  href="/products/sterilizers"
+                  className="text-neutral-600 hover:text-neutral-900 text-sm transition-colors"
+                >
+                  Sterilizers
+                </LocalizedClientLink>
+              </li>
+              <li>
+                <LocalizedClientLink
+                  href="/products/sealing-machines"
+                  className="text-neutral-600 hover:text-neutral-900 text-sm transition-colors"
+                >
+                  Sealing Machines
+                </LocalizedClientLink>
+              </li>
+              <li>
+                <LocalizedClientLink
+                  href="/products/water-distillers"
+                  className="text-neutral-600 hover:text-neutral-900 text-sm transition-colors"
+                >
+                  Water Distillers
+                </LocalizedClientLink>
+              </li>
+              <li>
+                <LocalizedClientLink
+                  href="/products/ultra-sonic-cleaners"
+                  className="text-neutral-600 hover:text-neutral-900 text-sm transition-colors"
+                >
+                  Ultra - Sonic Cleaners
+                </LocalizedClientLink>
+              </li>
+            </ul>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <h3 className="font-semibold text-neutral-900 text-lg">
+              Resources
+            </h3>
+            <ul className="flex flex-col gap-3">
+              <li>
+                <LocalizedClientLink
+                  href="/blogs"
+                  className="text-neutral-600 hover:text-neutral-900 text-sm transition-colors"
+                >
+                  Blogs
+                </LocalizedClientLink>
+              </li>
+              <li>
+                <Link
+                  href="/case-studies"
+                  className="text-neutral-600 hover:text-neutral-900 text-sm transition-colors"
+                >
+                  Case Studies
+                </Link>
+              </li>
+              <li>
+                <LocalizedClientLink
+                  href="/contact"
+                  className="text-neutral-600 hover:text-neutral-900 text-sm transition-colors"
+                >
+                  Contact
+                </LocalizedClientLink>
+              </li>
+              <li>
+                <LocalizedClientLink
+                  href="/shipping-returns"
+                  className="text-neutral-600 hover:text-neutral-900 text-sm transition-colors"
+                >
+                  Shipping & Returns
+                </LocalizedClientLink>
+              </li>
+              <li>
+                <LocalizedClientLink
+                  href="/warranty-policy"
+                  className="text-neutral-600 hover:text-neutral-900 text-sm transition-colors"
+                >
+                  Warranty Policy
+                </LocalizedClientLink>
+              </li>
+            </ul>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <h3 className="font-semibold text-neutral-900 text-lg">
+              Subscribe To Newsletter
+            </h3>
+            <p className="text-neutral-600 text-sm leading-relaxed">
+              Enter your email address for receiving latest news & product
+              updates.
+            </p>
+            <form className="flex gap-2">
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                className="flex-1 px-4 py-2.5 border border-neutral-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-amber-900 focus:border-transparent"
+                required
+              />
+              <button
+                type="submit"
+                className="bg-[#6B2F35] hover:bg-amber-800 text-white p-2.5 rounded transition-colors flex items-center justify-center"
+                aria-label="Subscribe"
+              >
+                <EmailIcon className="w-5 h-5" />
+              </button>
+            </form>
+            <p className="text-neutral-500 text-xs mt-2">
+              © Copyright 2025 - Sterolux
+            </p>
+          </div>
         </div>
-        <div className="flex w-full mb-16 justify-between text-ui-fg-muted">
-          <Text className="txt-compact-small">
-            © {new Date().getFullYear()} Medusa Store. All rights reserved.
-          </Text>
-          <MedusaCTA />
-        </div>
-      </div>
+      </SectionContainer>
     </footer>
   )
 }

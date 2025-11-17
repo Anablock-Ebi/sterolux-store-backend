@@ -11,6 +11,7 @@ const regionMapCache = {
 }
 
 async function getRegionMap(cacheId: string) {
+  console.log("Publishable Key:", PUBLISHABLE_API_KEY)
   const { regionMap, regionMapUpdated } = regionMapCache
 
   if (
