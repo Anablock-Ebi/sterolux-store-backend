@@ -6,7 +6,7 @@ import CartMismatchBanner from "@/modules/layout/components/cart-mismatch-banner
 import { CtaSection } from "@/modules/layout/components/cta-section"
 import { HeroSection } from "@/modules/layout/components/sections/hero-section"
 import { PrecisionSection } from "@/modules/layout/components/sections/precision-section"
-import { RecentBlogArticles } from "@/modules/layout/components/sections/recent-blogs-section"
+import { RecentBlogArticles } from "@/modules/layout/components/sections/blogs"
 import { StatsSection } from "@/modules/layout/components/sections/stats-section"
 
 import { TrustedHealthcare } from "@/modules/layout/components/trusted-health"

@@ -1,6 +1,6 @@
 import { extractBlogImage, getHeroImageUrl } from "@/lib/image-utils"
 import { FadeIn } from "@/modules/common/components/fade-in"
-import Link from "next/link"
+import LocalizedClientLink from "@/modules/common/components/localized-client-link"
 
 interface BlogPost {
   id: number
@@ -40,12 +40,12 @@ export function BlogCard({ post, showReadMore = true }: BlogCardProps) {
       <div className="relative flex shrink-0 flex-col items-start justify-start gap-4 md:gap-[25px]">
         <div className="relative flex shrink-0 flex-col items-start justify-start gap-3 leading-[0] not-italic md:gap-[15px]">
           <div className="relative w-full shrink-0 text-lg font-bold text-[#111928] md:text-[20px]">
-            <Link
+            <LocalizedClientLink
               href={`/blogs/${post.slug}`}
               className="transition-colors hover:text-gray-700"
             >
               <p className="leading-6 md:leading-[28px]">{post.title}</p>
-            </Link>
+            </LocalizedClientLink>
           </div>
 
           <div className="relative w-full shrink-0 text-sm font-normal text-[#637381] md:text-[16px]">
@@ -56,7 +56,7 @@ export function BlogCard({ post, showReadMore = true }: BlogCardProps) {
 
           {showReadMore && (
             <div className="mt-3 md:mt-4">
-              <Link
+              <LocalizedClientLink
                 href={`/blogs/${post.slug}`}
                 className="inline-flex items-center gap-2 text-sm leading-5 font-semibold transition-all hover:opacity-90 md:text-base md:leading-6 text-[#6B2F35]"
               >
@@ -73,7 +73,7 @@ export function BlogCard({ post, showReadMore = true }: BlogCardProps) {
                     fill="currentColor"
                   />
                 </svg>
-              </Link>
+              </LocalizedClientLink>
             </div>
           )}
         </div>

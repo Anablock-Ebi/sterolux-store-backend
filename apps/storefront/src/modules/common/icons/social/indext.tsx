@@ -1,7 +1,7 @@
 import type React from "react"
 import Link from "next/link"
 
-function FacebookIcon({ className }: { className?: string }) {
+export function FacebookIcon({ className }: { className?: string }) {
   return (
     <svg
       className={className}
@@ -11,6 +11,21 @@ function FacebookIcon({ className }: { className?: string }) {
     >
       <path
         d="M9.19795 21.5H13.198V13.4901H16.8021L17.198 9.50977H13.198V7.5C13.198 6.94772 13.6457 6.5 14.198 6.5H17.198V2.5H14.198C11.4365 2.5 9.19795 4.73858 9.19795 7.5V9.50977H7.19795L6.80206 13.4901H9.19795V21.5Z"
+        fill="currentColor"
+      />
+    </svg>
+  )
+}
+export function XIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
         fill="currentColor"
       />
     </svg>
@@ -33,7 +48,7 @@ function YoutubeIcon({ className }: { className?: string }) {
   )
 }
 
-function InstagramIcon({ className }: { className?: string }) {
+export function InstagramIcon({ className }: { className?: string }) {
   return (
     <svg
       className={className}
@@ -64,7 +79,7 @@ function InstagramIcon({ className }: { className?: string }) {
   )
 }
 
-function LinkedInIcon({ className }: { className?: string }) {
+export function LinkedInIcon({ className }: { className?: string }) {
   return (
     <svg
       className={className}

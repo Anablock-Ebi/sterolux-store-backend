@@ -22,7 +22,29 @@ const nextConfig = {
     missingSuspenseWithCSRBailout: false,
   },
   images: {
+    domains: [
+      "images.ctfassets.net",
+      "img.youtube.com",
+      "silverstatesmiles-cms.com",
+      "silverstatesmiles.s3.us-east-1.amazonaws.com",
+      "localhost",
+      "d2g1v73fjo3fyg.cloudfront.net",
+    ],
     remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "d2g1v73fjo3fyg.cloudfront.net",
+      },
+      {
+        protocol: "https",
+        hostname: "images.ctfassets.net",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
       {
         protocol: "http",
         hostname: "localhost",
@@ -44,6 +66,9 @@ const nextConfig = {
         hostname: "github.com",
       },
     ],
+    minimumCacheTTL: 86400,
+    formats: ["image/webp", "image/avif"],
+    unoptimized: true,
   },
 }
 
