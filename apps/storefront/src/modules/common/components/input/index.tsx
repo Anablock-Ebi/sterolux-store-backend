@@ -46,6 +46,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     }, [type, showPassword])
 
     useImperativeHandle(ref, () => inputRef.current!)
+    const sanitizedProps = {
+      ...props,
+      value: props.value === null ? "" : props.value,
+    }
 
     return (
       <div className={`flex flex-col w-full`}>
@@ -62,7 +66,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               "pt-4 pb-1 block w-full h-9 px-4 mt-0 bg-ui-bg-field rounded-full appearance-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active shadow-borders-base hover:bg-ui-bg-field-hover",
               className
             )}
-            {...props}
+            {...sanitizedProps}
             ref={inputRef}
           />
           <label

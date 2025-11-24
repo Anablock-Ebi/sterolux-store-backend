@@ -12,6 +12,7 @@ import SkeletonAccountButton from "@/modules/skeletons/components/skeleton-accou
 import SkeletonCartButton from "@/modules/skeletons/components/skeleton-cart-button"
 import SkeletonMegaMenu from "@/modules/skeletons/components/skeleton-mega-menu"
 import { Suspense } from "react"
+import Image from "next/image"
 
 export async function NavigationHeader() {
   const customer = await retrieveCustomer().catch(() => null)
@@ -26,10 +27,16 @@ export async function NavigationHeader() {
               className="hover:text-ui-fg-base flex items-center w-fit"
               href="/"
             >
-              <h1 className="small:text-base text-sm font-medium flex items-center">
-                <LogoIcon className="inline mr-2" />
-                Medusa B2B Starter
-              </h1>
+              <div>
+                <Image
+                  src="/logo.svg"
+                  alt="Sterolux Logo"
+                  width={150}
+                  height={100}
+                  className="transition-all duration-300 h-[80px] w-[150px]"
+                  priority
+                />
+              </div>
             </LocalizedClientLink>
 
             <nav>

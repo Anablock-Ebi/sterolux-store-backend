@@ -1,10 +1,13 @@
 "use client"
+
 import { MenuIcon, X, Phone, User, ShoppingCart } from "lucide-react"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { useCalendly } from "../calendly-provider"
 import LocalizedClientLink from "@/modules/common/components/localized-client-link"
+import { retrieveCustomer } from "@/lib/data/customer"
+import { retrieveCart } from "@/lib/data/cart"
 
 interface ScrollingNavbarProps {
   onScheduleDemo?: () => void
@@ -54,6 +57,7 @@ export function ScrollingNavbar({
   const textColor = isDarkMode ? "text-white" : "text-gray-900"
   const hoverColor = isDarkMode ? "hover:text-blue-200" : "hover:text-amber-900"
   const borderColor = isDarkMode ? "border-white/20" : "border-gray-300"
+  const logoSrc = isDarkMode ? "/logo-white.svg" : "/logo.svg"
   const buttonBg = isDarkMode
     ? "bg-transparent hover:bg-white/10"
     : "bg-transparent hover:bg-gray-100"
@@ -76,7 +80,7 @@ export function ScrollingNavbar({
         >
           <LocalizedClientLink href="/">
             <Image
-              src="/logo.svg"
+              src={logoSrc}
               alt="Sterolux Logo"
               width={150}
               height={100}

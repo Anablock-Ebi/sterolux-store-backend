@@ -8,6 +8,7 @@ import Button from "@/modules/common/components/button"
 import LocalizedClientLink from "@/modules/common/components/localized-client-link"
 import { B2BCart, B2BCustomer } from "@/types"
 import { ExclamationCircle } from "@medusajs/icons"
+import { useState } from "react"
 
 const Review = ({
   cart,
@@ -19,6 +20,7 @@ const Review = ({
   const spendLimitExceeded = customer
     ? checkSpendingLimit(cart, customer)
     : false
+  const [cardComplete, setCardComplete] = useState(false)
 
   return (
     <div className="flex flex-col gap-y-2">

@@ -1,7 +1,6 @@
 import { listRegions } from "@/lib/data/regions"
 import FeaturedProducts from "@/modules/home/components/featured-products"
 
-import Hero from "@/modules/home/components/hero"
 import { CtaSection } from "@/modules/layout/components/cta-section"
 import { HeroSection } from "@/modules/layout/components/sections/hero-section"
 import { PrecisionSection } from "@/modules/layout/components/sections/precision-section"
@@ -12,6 +11,9 @@ import Footer from "@/modules/layout/templates/footer"
 import SkeletonFeaturedProducts from "@/modules/skeletons/templates/skeleton-featured-products"
 import { Metadata } from "next"
 import { Suspense } from "react"
+import Hero from "@/modules/home/components/hero"
+import { NavigationHeader } from "@/modules/layout/templates/nav"
+import { retrieveCustomer } from "@/lib/data/customer"
 
 export const dynamicParams = true
 
@@ -46,16 +48,17 @@ export default async function Home(props: {
   const params = await props.params
 
   const { countryCode } = params
+  const customer = await retrieveCustomer().catch(() => null)
 
   return (
     <>
-      <HeroSection />
-
+      {/* <HeroSection /> */}
+      <NavigationHeader />
       <div className="flex flex-col gap-y-2 m-2">
-        {/* <Suspense fallback={<SkeletonFeaturedProducts />}>
+        <Suspense fallback={<SkeletonFeaturedProducts />}>
           <FeaturedProducts countryCode={countryCode} />
-        </Suspense> */}
-        <FeaturedProducts />
+        </Suspense>
+        {/* <FeaturedProducts /> */}
       </div>
       <StatsSection />
       <PrecisionSection />

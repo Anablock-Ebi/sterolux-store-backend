@@ -1,13 +1,12 @@
-"use client"
-
 import Image from "next/image"
 import { useState } from "react"
-import { ScrollingNavbar } from "../../scrolling-navbar"
+
 import { CalendlyModal } from "../../calendly-modal"
 import { ChevronRight } from "lucide-react"
+import { NavigationHeader } from "@/modules/layout/templates/nav"
 
 export function HeroSection() {
-  const [isCalendlyOpen, setIsCalendlyOpen] = useState(false)
+  // const [isCalendlyOpen, setIsCalendlyOpen] = useState(false)
 
   return (
     <div
@@ -25,10 +24,7 @@ export function HeroSection() {
         className="absolute z-[-10] h-full w-full object-cover object-center opacity-40"
       />
 
-      <ScrollingNavbar
-        onScheduleDemo={() => setIsCalendlyOpen(true)}
-        showScheduleDemo={true}
-      />
+      <NavigationHeader />
 
       <div className="flex flex-1 flex-col items-center justify-center px-3 pt-20 text-center text-white sm:px-6 lg:px-8 lg:pt-32">
         <div className="mx-auto w-full max-w-6xl  sm:space-y-6 ">
@@ -51,7 +47,7 @@ export function HeroSection() {
               <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
             </a>
             <button
-              onClick={() => setIsCalendlyOpen(true)}
+              // onClick={() => setIsCalendlyOpen(true)}
               className="w-full max-w-xs cursor-pointer rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 transition-all hover:scale-105 hover:bg-gray-50 sm:w-auto sm:px-6 sm:py-3 sm:text-base"
               style={{
                 backdropFilter: "blur(2px)",
@@ -66,10 +62,10 @@ export function HeroSection() {
 
       <div className="h-16 sm:h-24 md:h-32 lg:h-48"></div>
 
-      <CalendlyModal
+      {/* <CalendlyModal
         isOpen={isCalendlyOpen}
         onClose={() => setIsCalendlyOpen(false)}
-      />
+      /> */}
     </div>
   )
 }
